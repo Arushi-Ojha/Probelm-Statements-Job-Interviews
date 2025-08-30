@@ -1,19 +1,24 @@
-import numpy as np
+class Solution(object):
+    def isValidSudoku(self, board):
+        rows = [set() for _ in range(9)]
+        cols = [set() for _ in range(9)]
+        boxes = [set() for _ in range(9)]  # 3x3 boxes
 
-def sudoku():
-    g=0
-    a= np.array[9][9]
-    for i in range (9):
-        for j in range (9):
-            a[i][j]=int(input("Enter a[",i,"][",j,"] element: "))
-    for i in range (9):
-        for j in range (9):
-            if a[i][j]==0:
-                g= fill[i][j]
-                for k in range(9):
-                    if g!=a[i]:
-                        a[i][j]=g
-                    
-def fill(i,j):
-    for q in range (9):
-     return q
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+                if num == ".":  # skip empty cells
+                    continue
+
+                # Box index (0 to 8)
+                box_index = (i // 3) * 3 + (j // 3)
+
+                # Check row, column, and box
+                if num in rows[i] or num in cols[j] or num in boxes[box_index]:
+                    return False
+
+                rows[i].add(num)
+                cols[j].add(num)
+                boxes[box_index].add(num)
+
+        return True
